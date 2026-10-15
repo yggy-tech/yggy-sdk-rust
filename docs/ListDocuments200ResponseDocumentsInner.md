@@ -23,6 +23,7 @@ Name | Type | Description | Notes
 **failure_message** | Option<**String**> |  | [optional]
 **storage_url** | Option<**String**> |  | [optional]
 **deleted_at** | Option<**String**> |  | [optional]
+**note_kind** | Option<**String**> |  | [optional]
 **extraction_method** | Option<**String**> |  | [optional]
 **structured_regions** | Option<**String**> |  | [optional]
 **provenance_chain** | Option<**String**> |  | [optional]

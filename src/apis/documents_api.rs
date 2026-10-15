@@ -610,7 +610,7 @@ pub async fn stream_document_status(configuration: &configuration::Configuration
 }
 
 /// Uploads a document to storage, binds it to the project from the path, and queues it for processing.
-pub async fn upload_document(configuration: &configuration::Configuration, project_id: &str, x_yggy_organization_id: Option<&str>, file: Option<std::path::PathBuf>, text: Option<&str>, note_kind: Option<&str>, parent_note_id: Option<&str>, title: Option<&str>, source: Option<&str>, origin_system: Option<&str>, project_id2: Option<&str>, desired_tier: Option<&str>, inference_mode: Option<&str>) -> Result<models::UploadDocument202Response, Error<UploadDocumentError>> {
+pub async fn upload_document(configuration: &configuration::Configuration, project_id: &str, x_yggy_organization_id: Option<&str>, file: Option<std::path::PathBuf>, text: Option<&str>, note_kind: Option<&str>, parent_note_id: Option<&str>, for_link_id: Option<&str>, title: Option<&str>, source: Option<&str>, origin_system: Option<&str>, project_id2: Option<&str>, desired_tier: Option<&str>, inference_mode: Option<&str>) -> Result<models::UploadDocument202Response, Error<UploadDocumentError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;
     let p_header_x_yggy_organization_id = x_yggy_organization_id;
@@ -618,6 +618,7 @@ pub async fn upload_document(configuration: &configuration::Configuration, proje
     let p_form_text = text;
     let p_form_note_kind = note_kind;
     let p_form_parent_note_id = parent_note_id;
+    let p_form_for_link_id = for_link_id;
     let p_form_title = title;
     let p_form_source = source;
     let p_form_origin_system = origin_system;
@@ -655,6 +656,9 @@ pub async fn upload_document(configuration: &configuration::Configuration, proje
     }
     if let Some(param_value) = p_form_parent_note_id {
         multipart_form = multipart_form.text("parentNoteId", param_value.to_string());
+    }
+    if let Some(param_value) = p_form_for_link_id {
+        multipart_form = multipart_form.text("forLinkId", param_value.to_string());
     }
     if let Some(param_value) = p_form_title {
         multipart_form = multipart_form.text("title", param_value.to_string());

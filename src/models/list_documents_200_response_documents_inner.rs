@@ -51,6 +51,8 @@ pub struct ListDocuments200ResponseDocumentsInner {
     pub storage_url: Option<String>,
     #[serde(rename = "deletedAt", skip_serializing_if = "Option::is_none")]
     pub deleted_at: Option<String>,
+    #[serde(rename = "noteKind", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub note_kind: Option<Option<String>>,
     #[serde(rename = "extractionMethod", skip_serializing_if = "Option::is_none")]
     pub extraction_method: Option<ExtractionMethod>,
     #[serde(rename = "structuredRegions", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -105,6 +107,7 @@ impl ListDocuments200ResponseDocumentsInner {
             failure_message: None,
             storage_url: None,
             deleted_at: None,
+            note_kind: None,
             extraction_method: None,
             structured_regions: None,
             provenance_chain: None,
@@ -146,6 +149,10 @@ pub enum SourceKind {
     Chat,
     #[serde(rename = "SEED")]
     Seed,
+    #[serde(rename = "LINK")]
+    Link,
+    #[serde(rename = "SHARED")]
+    Shared,
 }
 
 impl Default for SourceKind {
