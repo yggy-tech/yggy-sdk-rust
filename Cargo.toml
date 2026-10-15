@@ -1,0 +1,21 @@
+[package]
+name = "yggy-sdk"
+version = "0.1.0"
+authors = ["support@yggy.tech"]
+description = "HTTP API for yggy. Send an API key on each request. Send one key; a different credential in a second header is refused with 400."
+license = "Apache-2.0"
+edition = "2021"
+
+[dependencies]
+serde = { version = "^1.0", features = ["derive"] }
+serde_with = { version = "^3.8", default-features = false, features = ["base64", "std", "macros"] }
+serde_json = "^1.0"
+serde_repr = "^0.1"
+url = "^2.5"
+uuid = { version = "^1.8", features = ["serde", "v4"] }
+reqwest = { version = "^0.12", default-features = false, features = ["json", "multipart"] }
+
+[features]
+default = ["native-tls"]
+native-tls = ["reqwest/native-tls"]
+rustls-tls = ["reqwest/rustls-tls"]
