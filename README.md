@@ -11,11 +11,11 @@
 
 ## Install
 
-The crate `yggy-sdk` is not published yet. Until it is, depend on the repository:
+The crate `yggy-sdk` is not published yet. Until it is, depend on a tagged release of the repository:
 
 ```toml
 [dependencies]
-yggy-sdk = { git = "https://github.com/yggy-tech/yggy-sdk-rust" }
+yggy-sdk = { git = "https://github.com/yggy-tech/yggy-sdk-rust", tag = "v0.1.0" }
 ```
 
 ## Example

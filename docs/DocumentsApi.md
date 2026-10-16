@@ -315,7 +315,7 @@ Name | Type | Description  | Required | Notes
 
 ## upload_document
 
-> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, title, source, origin_system, project_id2, desired_tier, inference_mode)
+> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, for_link_id, title, source, origin_system, project_id2, desired_tier, inference_mode)
 Upload and queue a document for async processing (project-scoped)
 
 Uploads a document to storage, binds it to the project from the path, and queues it for processing.
@@ -331,6 +331,7 @@ Name | Type | Description  | Required | Notes
 **text** | Option<**String**> | Plain text or markdown body. Used when no file is uploaded. |  |
 **note_kind** | Option<**String**> | Note kind. When set, the upload is stored on the caller's personal organization. |  |
 **parent_note_id** | Option<**String**> | yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file. |  |
+**for_link_id** | Option<**String**> | yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId. |  |
 **title** | Option<**String**> | Document title |  |
 **source** | Option<**String**> | Source identifier |  |
 **origin_system** | Option<**String**> | Business system the data originates from |  |
