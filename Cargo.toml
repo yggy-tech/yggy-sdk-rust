@@ -1,6 +1,6 @@
 [package]
 name = "yggy-sdk"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["support@yggy.tech"]
 description = "HTTP API for yggy. Send an API key on each request. Send one key; a different credential in a second header is refused with 400."
 license = "Apache-2.0"
