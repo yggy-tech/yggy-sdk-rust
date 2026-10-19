@@ -81,6 +81,10 @@ pub struct ListDocuments200ResponseDocumentsInner {
     pub source_author: Option<Option<String>>,
     #[serde(rename = "sourceMetadata", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub source_metadata: Option<Option<String>>,
+    #[serde(rename = "attachedTo", skip_serializing_if = "Option::is_none")]
+    pub attached_to: Option<Box<models::ListDocuments200ResponseDocumentsInnerAttachedTo>>,
+    #[serde(rename = "mailAttachments", skip_serializing_if = "Option::is_none")]
+    pub mail_attachments: Option<Vec<models::ListDocuments200ResponseDocumentsInnerMailAttachmentsInner>>,
     #[serde(rename = "projectExternalId", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub project_external_id: Option<Option<String>>,
 }
@@ -122,6 +126,8 @@ impl ListDocuments200ResponseDocumentsInner {
             source_modified_at: None,
             source_author: None,
             source_metadata: None,
+            attached_to: None,
+            mail_attachments: None,
             project_external_id: None,
         }
     }
@@ -153,6 +159,8 @@ pub enum SourceKind {
     Link,
     #[serde(rename = "SHARED")]
     Shared,
+    #[serde(rename = "FORWARDED")]
+    Forwarded,
 }
 
 impl Default for SourceKind {
