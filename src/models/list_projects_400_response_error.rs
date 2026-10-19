@@ -79,6 +79,8 @@ pub enum Code {
     StorageNotConfigured,
     #[serde(rename = "BILLING_NOT_CONFIGURED")]
     BillingNotConfigured,
+    #[serde(rename = "LICENSE_INACTIVE")]
+    LicenseInactive,
     #[serde(rename = "PLAN_REQUIRED")]
     PlanRequired,
     #[serde(rename = "MEMBER_LIMIT_REACHED")]
@@ -107,6 +109,10 @@ pub enum Code {
     OrgKeyGraphScopeUnavailable,
     #[serde(rename = "ORG_KEY_TOO_MANY_PROJECTS")]
     OrgKeyTooManyProjects,
+    #[serde(rename = "SENDER_IS_LOGIN_EMAIL")]
+    SenderIsLoginEmail,
+    #[serde(rename = "SENDER_TAKEN")]
+    SenderTaken,
 }
 
 impl Default for Code {

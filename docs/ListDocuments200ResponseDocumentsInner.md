@@ -38,6 +38,8 @@ Name | Type | Description | Notes
 **source_modified_at** | Option<**String**> |  | [optional]
 **source_author** | Option<**String**> |  | [optional]
 **source_metadata** | Option<**String**> |  | [optional]
+**attached_to** | Option<[**models::ListDocuments200ResponseDocumentsInnerAttachedTo**](listDocuments_200_response_documents_inner_attachedTo.md)> |  | [optional]
+**mail_attachments** | Option<[**Vec<models::ListDocuments200ResponseDocumentsInnerMailAttachmentsInner>**](listDocuments_200_response_documents_inner_mailAttachments_inner.md)> |  | [optional]
 **project_external_id** | Option<**String**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
