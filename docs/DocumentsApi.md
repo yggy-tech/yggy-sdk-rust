@@ -315,7 +315,7 @@ Name | Type | Description  | Required | Notes
 
 ## upload_document
 
-> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, for_link_id, title, source, origin_system, project_id2, desired_tier, inference_mode)
+> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, for_link_id, title, source, origin_system, external_id, metadata, project_id2, desired_tier, inference_mode)
 Upload and queue a document for async processing (project-scoped)
 
 Uploads a document to storage, binds it to the project from the path, and queues it for processing.
@@ -335,6 +335,8 @@ Name | Type | Description  | Required | Notes
 **title** | Option<**String**> | Document title |  |
 **source** | Option<**String**> | Source identifier |  |
 **origin_system** | Option<**String**> | Business system the data originates from |  |
+**external_id** | Option<**String**> | Your own id for the document. Returned as externalId in query results and chat citations. |  |
+**metadata** | Option<**String**> | JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations. |  |
 **project_id2** | Option<**String**> | Project ID to bind the document to at upload time |  |
 **desired_tier** | Option<**String**> | Model tier for extraction. Defaults to auto. |  |
 **inference_mode** | Option<**String**> | Inference routing for extraction. Defaults to org settings. |  |

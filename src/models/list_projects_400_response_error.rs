@@ -113,6 +113,28 @@ pub enum Code {
     SenderIsLoginEmail,
     #[serde(rename = "SENDER_TAKEN")]
     SenderTaken,
+    #[serde(rename = "RUNNER_AMBIGUOUS_PRINCIPAL")]
+    RunnerAmbiguousPrincipal,
+    #[serde(rename = "RUNNER_SIGNATURE_MALFORMED")]
+    RunnerSignatureMalformed,
+    #[serde(rename = "RUNNER_UNAUTHORIZED")]
+    RunnerUnauthorized,
+    #[serde(rename = "RUNNER_LENGTH_REQUIRED")]
+    RunnerLengthRequired,
+    #[serde(rename = "RUNNER_BODY_TOO_LARGE")]
+    RunnerBodyTooLarge,
+    #[serde(rename = "RUNNER_DIGEST_MISMATCH")]
+    RunnerDigestMismatch,
+    #[serde(rename = "RUNNER_UNAVAILABLE")]
+    RunnerUnavailable,
+    #[serde(rename = "RUNNER_REGISTRATION_TOKEN_INVALID")]
+    RunnerRegistrationTokenInvalid,
+    #[serde(rename = "RUNNER_KEY_REJECTED")]
+    RunnerKeyRejected,
+    #[serde(rename = "RUNNER_KEY_IN_USE")]
+    RunnerKeyInUse,
+    #[serde(rename = "RUNNER_KEY_CHANGED")]
+    RunnerKeyChanged,
 }
 
 impl Default for Code {

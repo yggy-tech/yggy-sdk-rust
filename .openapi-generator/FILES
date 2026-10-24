@@ -42,6 +42,9 @@ docs/ListDocuments200Response.md
 docs/ListDocuments200ResponseDocumentsInner.md
 docs/ListDocuments200ResponseDocumentsInnerAttachedTo.md
 docs/ListDocuments200ResponseDocumentsInnerMailAttachmentsInner.md
+docs/ListDocuments200ResponseDocumentsInnerStorageLocation.md
+docs/ListDocuments200ResponseDocumentsInnerStorageLocationOneOf.md
+docs/ListDocuments200ResponseDocumentsInnerStorageLocationOneOf1.md
 docs/ListGraphExports200Response.md
 docs/ListGraphExports200ResponseExportsInner.md
 docs/ListProjects200Response.md
@@ -54,6 +57,7 @@ docs/QueryApi.md
 docs/QueryProject200Response.md
 docs/QueryProject200ResponseArchivedHitsInner.md
 docs/QueryProject200ResponseContextsInner.md
+docs/QueryProject200ResponseContextsInnerMetadataValue.md
 docs/QueryProject200ResponseEntitiesInner.md
 docs/QueryProject200ResponseEntitiesInnerIdentity.md
 docs/QueryProject200ResponseTriplesInner.md
@@ -109,6 +113,9 @@ src/models/list_documents_200_response.rs
 src/models/list_documents_200_response_documents_inner.rs
 src/models/list_documents_200_response_documents_inner_attached_to.rs
 src/models/list_documents_200_response_documents_inner_mail_attachments_inner.rs
+src/models/list_documents_200_response_documents_inner_storage_location.rs
+src/models/list_documents_200_response_documents_inner_storage_location_one_of.rs
+src/models/list_documents_200_response_documents_inner_storage_location_one_of_1.rs
 src/models/list_graph_exports_200_response.rs
 src/models/list_graph_exports_200_response_exports_inner.rs
 src/models/list_projects_200_response.rs
@@ -119,6 +126,7 @@ src/models/mod.rs
 src/models/query_project_200_response.rs
 src/models/query_project_200_response_archived_hits_inner.rs
 src/models/query_project_200_response_contexts_inner.rs
+src/models/query_project_200_response_contexts_inner_metadata_value.rs
 src/models/query_project_200_response_entities_inner.rs
 src/models/query_project_200_response_entities_inner_identity.rs
 src/models/query_project_200_response_triples_inner.rs
