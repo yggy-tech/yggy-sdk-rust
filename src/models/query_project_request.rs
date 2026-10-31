@@ -13,19 +13,19 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProjectRequest {
-    /// Natural-language question to retrieve documents for
+    /// The question in plain language. yggy finds the documents that answer it.
     #[serde(rename = "question")]
     pub question: String,
-    /// Maximum number of ranked contexts to return
+    /// How many documents to return, best first.
     #[serde(rename = "topK", skip_serializing_if = "Option::is_none")]
     pub top_k: Option<i32>,
-    /// hybrid combines document text with graph matches; lexical uses document text only; graph uses graph matches only
+    /// How documents are found and ranked. `hybrid` (default) uses the facts yggy extracted and the document text; `lexical` uses the document text only; `graph` returns only documents the extracted facts point to.
     #[serde(rename = "mode", skip_serializing_if = "Option::is_none")]
     pub mode: Option<Mode>,
-    /// Optional graph fields to attach. Omit for the default retrieve body. identity alone returns only entities with an approved identity.
+    /// Extra knowledge to attach to the answer. `facts` (also accepted as `triples`) adds the facts extracted from the returned documents; `entities` adds the people, organizations and things they mention; `identity` adds only entities with an approved identity, such as a register number.
     #[serde(rename = "include", skip_serializing_if = "Option::is_none")]
     pub include: Option<Vec<Include>>,
-    /// Also search cold triples. Archived hits surface separately and trigger a background promote. Single-project scope only.
+    /// Also search archived facts. They are returned in `archivedHits` and brought back into the live graph in the background. Project queries only.
     #[serde(rename = "includeArchived", skip_serializing_if = "Option::is_none")]
     pub include_archived: Option<bool>,
 }
@@ -41,7 +41,7 @@ impl QueryProjectRequest {
         }
     }
 }
-/// hybrid combines document text with graph matches; lexical uses document text only; graph uses graph matches only
+/// How documents are found and ranked. `hybrid` (default) uses the facts yggy extracted and the document text; `lexical` uses the document text only; `graph` returns only documents the extracted facts point to.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Mode {
     #[serde(rename = "hybrid")]
@@ -57,7 +57,7 @@ impl Default for Mode {
         Self::Hybrid
     }
 }
-/// Optional graph fields to attach. Omit for the default retrieve body. identity alone returns only entities with an approved identity.
+/// Extra knowledge to attach to the answer. `facts` (also accepted as `triples`) adds the facts extracted from the returned documents; `entities` adds the people, organizations and things they mention; `identity` adds only entities with an approved identity, such as a register number.
 #[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
 pub enum Include {
     #[serde(rename = "entities")]
@@ -66,6 +66,8 @@ pub enum Include {
     Triples,
     #[serde(rename = "identity")]
     Identity,
+    #[serde(rename = "facts")]
+    Facts,
 }
 
 impl Default for Include {

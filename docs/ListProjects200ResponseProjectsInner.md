@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **organization_id** | **String** |  | 
 **external_id** | Option<**String**> |  | [optional]
 **kind** | Option<**String**> |  | [optional]
+**visibility** | **String** | Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`. | 
 **extraction_purpose** | Option<**String**> |  | [optional]
 **extraction_include** | Option<**Vec<String>**> |  | [optional]
 **extraction_skip** | Option<**Vec<String>**> |  | [optional]
@@ -18,9 +19,10 @@ Name | Type | Description | Notes
 **entity_merge_mode** | Option<**String**> |  | [optional]
 **created_at** | Option<**String**> |  | [optional]
 **updated_at** | Option<**String**> |  | [optional]
-**document_count** | **i32** |  | 
-**triple_count** | **i32** |  | 
-**entity_count** | **i32** |  | 
+**document_count** | Option<**i32**> | Documents in the project. Null when `isMember` is false: a public project's numbers are for its members only. | 
+**triple_count** | Option<**i32**> | Relations (triples) in the project. Null when `isMember` is false: a public project's numbers are for its members only. | 
+**entity_count** | Option<**i32**> | Entities in the project. Null when `isMember` is false: a public project's numbers are for its members only. | 
+**is_member** | **bool** | True when the caller can open the project: a project member, an organization owner or admin, or an organization API key. False for a public project the caller is not a member of. | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

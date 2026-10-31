@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **current** | Option<**f64**> |  | [optional]
 **total** | Option<**f64**> |  | [optional]
 **unit** | Option<**String**> |  | [optional]
+**waited_for_capacity** | Option<**bool**> |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

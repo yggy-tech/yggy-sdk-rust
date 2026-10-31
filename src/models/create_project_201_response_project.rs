@@ -27,6 +27,9 @@ pub struct CreateProject201ResponseProject {
     pub external_id: Option<Option<String>>,
     #[serde(rename = "kind", skip_serializing_if = "Option::is_none")]
     pub kind: Option<Kind>,
+    /// Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.
+    #[serde(rename = "visibility")]
+    pub visibility: Visibility,
     #[serde(rename = "extractionPurpose", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub extraction_purpose: Option<Option<String>>,
     #[serde(rename = "extractionInclude", skip_serializing_if = "Option::is_none")]
@@ -44,7 +47,7 @@ pub struct CreateProject201ResponseProject {
 }
 
 impl CreateProject201ResponseProject {
-    pub fn new(id: String, slug: String, name: String, color: String, organization_id: String) -> CreateProject201ResponseProject {
+    pub fn new(id: String, slug: String, name: String, color: String, organization_id: String, visibility: Visibility) -> CreateProject201ResponseProject {
         CreateProject201ResponseProject {
             id,
             slug,
@@ -53,6 +56,7 @@ impl CreateProject201ResponseProject {
             organization_id,
             external_id: None,
             kind: None,
+            visibility,
             extraction_purpose: None,
             extraction_include: None,
             extraction_skip: None,
@@ -75,6 +79,20 @@ pub enum Kind {
 impl Default for Kind {
     fn default() -> Kind {
         Self::Shared
+    }
+}
+/// Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Visibility {
+    #[serde(rename = "private")]
+    Private,
+    #[serde(rename = "public")]
+    Public,
+}
+
+impl Default for Visibility {
+    fn default() -> Visibility {
+        Self::Private
     }
 }
 /// 

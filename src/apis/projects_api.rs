@@ -87,7 +87,7 @@ pub async fn create_project(configuration: &configuration::Configuration, create
     }
 }
 
-/// List projects in the active organization with pagination, search, and sort. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
+/// List projects in the active organization with pagination, search, and sort. Organization owners and admins and organization API keys see every shared project. Other members see the projects they are a member of, plus public projects, which come back with isMember false and no counts. Private projects they are not a member of are not listed and not counted in total. Default sort is recentlyViewed (last-viewed desc, falling back to createdAt desc), so a user with no views yet gets creation-time order. name orders by project name. Search is a case-insensitive substring over project name and slug.
 pub async fn list_projects(configuration: &configuration::Configuration, limit: Option<i32>, offset: Option<i32>, q: Option<&str>, sort_by: Option<&str>, sort_dir: Option<&str>) -> Result<models::ListProjects200Response, Error<ListProjectsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_limit = limit;

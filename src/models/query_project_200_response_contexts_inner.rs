@@ -13,24 +13,36 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProject200ResponseContextsInner {
-    /// Stable context id: source slug when present, otherwise the document id
+    /// Stable id of the result: the document's `source` when it has one, otherwise its id
     #[serde(rename = "id")]
     pub id: String,
-    /// Document id
+    /// yggy document id
     #[serde(rename = "documentId")]
     pub document_id: String,
-    /// Caller-supplied source id when the document has one
+    /// The `source` you set on upload, when the document has one
     #[serde(rename = "source", skip_serializing_if = "Option::is_none")]
     pub source: Option<String>,
     /// Document title
     #[serde(rename = "title")]
     pub title: String,
-    /// Short passage used for ranking
+    /// The passage of the document that best matches the question, up to 400 characters. The title when yggy has no text for the document.
     #[serde(rename = "snippet")]
     pub snippet: String,
-    /// Relative rank from 0 to 1 inside this result set
+    /// Relevance from 0 to 1, relative to the best document in this response
     #[serde(rename = "score")]
     pub score: f64,
+    /// Your own id for the document, as sent on upload
+    #[serde(rename = "externalId", skip_serializing_if = "Option::is_none")]
+    pub external_id: Option<String>,
+    /// Business system the data originates from
+    #[serde(rename = "originSystem", skip_serializing_if = "Option::is_none")]
+    pub origin_system: Option<String>,
+    /// Link to the document in your system
+    #[serde(rename = "webUrl", skip_serializing_if = "Option::is_none")]
+    pub web_url: Option<String>,
+    /// Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here.
+    #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, models::QueryProject200ResponseContextsInnerMetadataValue>>,
 }
 
 impl QueryProject200ResponseContextsInner {
@@ -42,6 +54,10 @@ impl QueryProject200ResponseContextsInner {
             title,
             snippet,
             score,
+            external_id: None,
+            origin_system: None,
+            web_url: None,
+            metadata: None,
         }
     }
 }
