@@ -33,6 +33,8 @@ pub struct GetDocumentStatus200ResponseStepsInner {
     pub total: Option<f64>,
     #[serde(rename = "unit", skip_serializing_if = "Option::is_none")]
     pub unit: Option<String>,
+    #[serde(rename = "waitedForCapacity", skip_serializing_if = "Option::is_none")]
+    pub waited_for_capacity: Option<bool>,
 }
 
 impl GetDocumentStatus200ResponseStepsInner {
@@ -48,6 +50,7 @@ impl GetDocumentStatus200ResponseStepsInner {
             current: None,
             total: None,
             unit: None,
+            waited_for_capacity: None,
         }
     }
 }

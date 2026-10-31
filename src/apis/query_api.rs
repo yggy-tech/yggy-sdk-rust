@@ -36,7 +36,7 @@ pub enum QueryProjectError {
 }
 
 
-/// Return ranked document contexts for a question across every project the caller can access. Same body as the project query, including optional include.
+/// Same as the project query, across every project the caller can access. Results from all those projects are ranked together.
 pub async fn query_organization(configuration: &configuration::Configuration, x_yggy_organization_id: Option<&str>, query_project_request: Option<models::QueryProjectRequest>) -> Result<models::QueryProject200Response, Error<QueryOrganizationError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_header_x_yggy_organization_id = x_yggy_organization_id;
@@ -81,7 +81,7 @@ pub async fn query_organization(configuration: &configuration::Configuration, x_
     }
 }
 
-/// Return ranked document contexts for a question in one project. Chat remains the conversational surface. This route is retrieve-only. Add include to attach matching entities, triples, or approved identity.
+/// Returns the documents in this project that best answer the question, best first, each with the passage that matches and a relevance score. yggy finds them through the facts it extracted (a fact found by the question leads to the document it came from) and through the document title and text. Add `include` to attach the facts of the returned documents, or the entities they mention. This route retrieves only; for a written answer use chat.
 pub async fn query_project(configuration: &configuration::Configuration, project_id: &str, x_yggy_organization_id: Option<&str>, query_project_request: Option<models::QueryProjectRequest>) -> Result<models::QueryProject200Response, Error<QueryProjectError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_path_project_id = project_id;

@@ -11,6 +11,7 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// QueryProject200ResponseTriplesInnerSubject : What the fact is about
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProject200ResponseTriplesInnerSubject {
     /// Public HTTPS URI when one is stored
@@ -21,6 +22,7 @@ pub struct QueryProject200ResponseTriplesInnerSubject {
 }
 
 impl QueryProject200ResponseTriplesInnerSubject {
+    /// What the fact is about
     pub fn new(label: String) -> QueryProject200ResponseTriplesInnerSubject {
         QueryProject200ResponseTriplesInnerSubject {
             uri: None,

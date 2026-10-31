@@ -13,15 +13,16 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProject200Response {
-    /// Short extractive answer from the top context. Empty when nothing was retrieved.
+    /// The sentence from the best document that answers the question. Empty when nothing matched.
     #[serde(rename = "answer")]
     pub answer: String,
+    /// The documents that answer the question, best first
     #[serde(rename = "contexts")]
     pub contexts: Vec<models::QueryProject200ResponseContextsInner>,
-    /// Present when include asks for entities or identity
+    /// Present when `include` asks for entities or identity
     #[serde(rename = "entities", skip_serializing_if = "Option::is_none")]
     pub entities: Option<Vec<models::QueryProject200ResponseEntitiesInner>>,
-    /// Present when include asks for triples
+    /// The facts of the returned documents. Present when `include` asks for facts (or triples).
     #[serde(rename = "triples", skip_serializing_if = "Option::is_none")]
     pub triples: Option<Vec<models::QueryProject200ResponseTriplesInner>>,
     /// Present when includeArchived was requested on a single project

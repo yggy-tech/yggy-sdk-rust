@@ -11,23 +11,26 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// QueryProject200ResponseTriplesInner : A fact yggy extracted: subject, relation, object
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProject200ResponseTriplesInner {
     #[serde(rename = "subject")]
     pub subject: Box<models::QueryProject200ResponseTriplesInnerSubject>,
     #[serde(rename = "predicate")]
-    pub predicate: Box<models::QueryProject200ResponseTriplesInnerSubject>,
+    pub predicate: Box<models::QueryProject200ResponseTriplesInnerPredicate>,
     #[serde(rename = "object")]
-    pub object: Box<models::QueryProject200ResponseTriplesInnerSubject>,
-    /// Stored hit text. Omitted when the graph hit has none.
+    pub object: Box<models::QueryProject200ResponseTriplesInnerObject>,
+    /// Source text for the fact, when yggy stored it
     #[serde(rename = "evidence", skip_serializing_if = "Option::is_none")]
     pub evidence: Option<String>,
+    /// The returned document the fact was extracted from
     #[serde(rename = "documentId", skip_serializing_if = "Option::is_none")]
     pub document_id: Option<String>,
 }
 
 impl QueryProject200ResponseTriplesInner {
-    pub fn new(subject: models::QueryProject200ResponseTriplesInnerSubject, predicate: models::QueryProject200ResponseTriplesInnerSubject, object: models::QueryProject200ResponseTriplesInnerSubject) -> QueryProject200ResponseTriplesInner {
+    /// A fact yggy extracted: subject, relation, object
+    pub fn new(subject: models::QueryProject200ResponseTriplesInnerSubject, predicate: models::QueryProject200ResponseTriplesInnerPredicate, object: models::QueryProject200ResponseTriplesInnerObject) -> QueryProject200ResponseTriplesInner {
         QueryProject200ResponseTriplesInner {
             subject: Box::new(subject),
             predicate: Box::new(predicate),
