@@ -47,6 +47,8 @@ pub enum Code {
     Forbidden,
     #[serde(rename = "NOT_FOUND")]
     NotFound,
+    #[serde(rename = "RUN_DETAILS_OWNER_ONLY")]
+    RunDetailsOwnerOnly,
     #[serde(rename = "CONFLICT")]
     Conflict,
     #[serde(rename = "PROJECT_DENIED")]
@@ -59,12 +61,22 @@ pub enum Code {
     HuginnStreamError,
     #[serde(rename = "QUERY_FAILED")]
     QueryFailed,
+    #[serde(rename = "GRAPH_WRITE_FAILED")]
+    GraphWriteFailed,
     #[serde(rename = "PROVIDER_CONFLICT")]
     ProviderConflict,
     #[serde(rename = "PROVIDER_CONFIG_INVALID")]
     ProviderConfigInvalid,
     #[serde(rename = "PROVIDER_NOT_CONNECTED")]
     ProviderNotConnected,
+    #[serde(rename = "GRANT_MIXED_EVERYONE")]
+    GrantMixedEveryone,
+    #[serde(rename = "GRANT_TARGET_UNKNOWN")]
+    GrantTargetUnknown,
+    #[serde(rename = "RUNNER_UNKNOWN")]
+    RunnerUnknown,
+    #[serde(rename = "SCHEMA_NAME_UNKNOWN")]
+    SchemaNameUnknown,
     #[serde(rename = "PROVIDER_RATE_LIMITED")]
     ProviderRateLimited,
     #[serde(rename = "PROJECT_MEMBER_USER_NOT_IN_ORG")]
@@ -75,10 +87,16 @@ pub enum Code {
     ProjectMemberLastOwner,
     #[serde(rename = "PROJECT_CONFLICT")]
     ProjectConflict,
+    #[serde(rename = "ENTITY_MERGE_CROSS_PROJECT_LINKS")]
+    EntityMergeCrossProjectLinks,
+    #[serde(rename = "ENTITY_MERGE_CROSS_PROJECT_FORBIDDEN")]
+    EntityMergeCrossProjectForbidden,
     #[serde(rename = "STORAGE_NOT_CONFIGURED")]
     StorageNotConfigured,
     #[serde(rename = "BILLING_NOT_CONFIGURED")]
     BillingNotConfigured,
+    #[serde(rename = "GOOGLE_PICKER_NOT_CONFIGURED")]
+    GooglePickerNotConfigured,
     #[serde(rename = "LICENSE_INACTIVE")]
     LicenseInactive,
     #[serde(rename = "PLAN_REQUIRED")]
@@ -103,6 +121,8 @@ pub enum Code {
     OrgKeyPersonalScope,
     #[serde(rename = "API_KEY_PERMISSION_EXCEEDS_ROLE")]
     ApiKeyPermissionExceedsRole,
+    #[serde(rename = "ROLE_EXCEEDS_CALLER_PERMISSIONS")]
+    RoleExceedsCallerPermissions,
     #[serde(rename = "API_KEY_NO_PERMISSIONS")]
     ApiKeyNoPermissions,
     #[serde(rename = "ORG_KEY_GRAPH_SCOPE_UNAVAILABLE")]
@@ -113,6 +133,94 @@ pub enum Code {
     SenderIsLoginEmail,
     #[serde(rename = "SENDER_TAKEN")]
     SenderTaken,
+    #[serde(rename = "RUNNER_AMBIGUOUS_PRINCIPAL")]
+    RunnerAmbiguousPrincipal,
+    #[serde(rename = "RUNNER_SIGNATURE_MALFORMED")]
+    RunnerSignatureMalformed,
+    #[serde(rename = "RUNNER_UNAUTHORIZED")]
+    RunnerUnauthorized,
+    #[serde(rename = "RUNNER_LENGTH_REQUIRED")]
+    RunnerLengthRequired,
+    #[serde(rename = "RUNNER_BODY_TOO_LARGE")]
+    RunnerBodyTooLarge,
+    #[serde(rename = "RUNNER_DIGEST_MISMATCH")]
+    RunnerDigestMismatch,
+    #[serde(rename = "RUNNER_UNAVAILABLE")]
+    RunnerUnavailable,
+    #[serde(rename = "RUNNER_REGISTRATION_TOKEN_INVALID")]
+    RunnerRegistrationTokenInvalid,
+    #[serde(rename = "RUNNER_KEY_REJECTED")]
+    RunnerKeyRejected,
+    #[serde(rename = "RUNNER_KEY_IN_USE")]
+    RunnerKeyInUse,
+    #[serde(rename = "RUNNER_KEY_CHANGED")]
+    RunnerKeyChanged,
+    #[serde(rename = "RUNNER_VERSION_UNSUPPORTED")]
+    RunnerVersionUnsupported,
+    #[serde(rename = "RUNNER_INGEST_BUDGET")]
+    RunnerIngestBudget,
+    #[serde(rename = "RUNNER_LIMIT_REACHED")]
+    RunnerLimitReached,
+    #[serde(rename = "RUNNER_LEASE_LOST")]
+    RunnerLeaseLost,
+    #[serde(rename = "RUNNER_POLL_IN_PROGRESS")]
+    RunnerPollInProgress,
+    #[serde(rename = "RUNNER_PART_CONFLICT")]
+    RunnerPartConflict,
+    #[serde(rename = "RUNNER_RESULT_TOO_LARGE")]
+    RunnerResultTooLarge,
+    #[serde(rename = "RUNNER_RESULT_INVALID")]
+    RunnerResultInvalid,
+    #[serde(rename = "RUNNER_RESULT_INCOMPLETE")]
+    RunnerResultIncomplete,
+    #[serde(rename = "RUNNER_FORMAT_UNSUPPORTED")]
+    RunnerFormatUnsupported,
+    #[serde(rename = "RUNNER_ONTOLOGY_MISMATCH")]
+    RunnerOntologyMismatch,
+    #[serde(rename = "RUNNER_POLICY_VIOLATION")]
+    RunnerPolicyViolation,
+    #[serde(rename = "WRITE_ENDPOINT_INVALID")]
+    WriteEndpointInvalid,
+    #[serde(rename = "APPROVER_NOT_MEMBER")]
+    ApproverNotMember,
+    #[serde(rename = "WRITE_ORDERS_IN_FLIGHT")]
+    WriteOrdersInFlight,
+    #[serde(rename = "WRITE_SYSTEM_INVALID")]
+    WriteSystemInvalid,
+    #[serde(rename = "SYSTEM_HAS_WRITE_TARGETS")]
+    SystemHasWriteTargets,
+    #[serde(rename = "FIELD_NOT_WRITABLE")]
+    FieldNotWritable,
+    #[serde(rename = "CHANGE_TOO_LARGE")]
+    ChangeTooLarge,
+    #[serde(rename = "CHANGE_PENDING_FOR_FIELD")]
+    ChangePendingForField,
+    #[serde(rename = "NOT_AN_APPROVER")]
+    NotAnApprover,
+    #[serde(rename = "SECOND_APPROVER_REQUIRED")]
+    SecondApproverRequired,
+    #[serde(rename = "CHANGE_STATE_CHANGED")]
+    ChangeStateChanged,
+    #[serde(rename = "REFRESH_FIELDS_INCOMPLETE")]
+    RefreshFieldsIncomplete,
+    #[serde(rename = "WRITE_ENDPOINT_IN_USE")]
+    WriteEndpointInUse,
+    #[serde(rename = "APPROVAL_REQUIRES_SESSION")]
+    ApprovalRequiresSession,
+    #[serde(rename = "CHANGE_REVISION_STALE")]
+    ChangeRevisionStale,
+    #[serde(rename = "CHANGE_RESULT_FINAL")]
+    ChangeResultFinal,
+    #[serde(rename = "CHANGESET_NOTHING_TO_EXPORT")]
+    ChangesetNothingToExport,
+    #[serde(rename = "CHANGE_EVIDENCE_NOT_IN_PROJECT")]
+    ChangeEvidenceNotInProject,
+    #[serde(rename = "CHANGE_PROJECT_NOT_ALLOWED")]
+    ChangeProjectNotAllowed,
+    #[serde(rename = "ORG_WIDE_ACCESS_REQUIRED")]
+    OrgWideAccessRequired,
+    #[serde(rename = "WRITE_BACK_AMBIGUOUS_PRINCIPAL")]
+    WriteBackAmbiguousPrincipal,
 }
 
 impl Default for Code {

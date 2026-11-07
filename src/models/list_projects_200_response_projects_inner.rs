@@ -27,6 +27,9 @@ pub struct ListProjects200ResponseProjectsInner {
     pub external_id: Option<Option<String>>,
     #[serde(rename = "kind", skip_serializing_if = "Option::is_none")]
     pub kind: Option<Kind>,
+    /// Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.
+    #[serde(rename = "visibility")]
+    pub visibility: Visibility,
     #[serde(rename = "extractionPurpose", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub extraction_purpose: Option<Option<String>>,
     #[serde(rename = "extractionInclude", skip_serializing_if = "Option::is_none")]
@@ -41,16 +44,22 @@ pub struct ListProjects200ResponseProjectsInner {
     pub created_at: Option<String>,
     #[serde(rename = "updatedAt", skip_serializing_if = "Option::is_none")]
     pub updated_at: Option<String>,
-    #[serde(rename = "documentCount")]
-    pub document_count: i32,
-    #[serde(rename = "tripleCount")]
-    pub triple_count: i32,
-    #[serde(rename = "entityCount")]
-    pub entity_count: i32,
+    /// Documents in the project. Null when `isMember` is false: a public project's numbers are for its members only.
+    #[serde(rename = "documentCount", deserialize_with = "Option::deserialize")]
+    pub document_count: Option<i32>,
+    /// Relations (triples) in the project. Null when `isMember` is false: a public project's numbers are for its members only.
+    #[serde(rename = "tripleCount", deserialize_with = "Option::deserialize")]
+    pub triple_count: Option<i32>,
+    /// Entities in the project. Null when `isMember` is false: a public project's numbers are for its members only.
+    #[serde(rename = "entityCount", deserialize_with = "Option::deserialize")]
+    pub entity_count: Option<i32>,
+    /// True when the caller can open the project: a project member, an organization owner or admin, or an organization API key. False for a public project the caller is not a member of.
+    #[serde(rename = "isMember")]
+    pub is_member: bool,
 }
 
 impl ListProjects200ResponseProjectsInner {
-    pub fn new(id: String, slug: String, name: String, color: String, organization_id: String, document_count: i32, triple_count: i32, entity_count: i32) -> ListProjects200ResponseProjectsInner {
+    pub fn new(id: String, slug: String, name: String, color: String, organization_id: String, visibility: Visibility, document_count: Option<i32>, triple_count: Option<i32>, entity_count: Option<i32>, is_member: bool) -> ListProjects200ResponseProjectsInner {
         ListProjects200ResponseProjectsInner {
             id,
             slug,
@@ -59,6 +68,7 @@ impl ListProjects200ResponseProjectsInner {
             organization_id,
             external_id: None,
             kind: None,
+            visibility,
             extraction_purpose: None,
             extraction_include: None,
             extraction_skip: None,
@@ -69,6 +79,7 @@ impl ListProjects200ResponseProjectsInner {
             document_count,
             triple_count,
             entity_count,
+            is_member,
         }
     }
 }
@@ -84,6 +95,20 @@ pub enum Kind {
 impl Default for Kind {
     fn default() -> Kind {
         Self::Shared
+    }
+}
+/// Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Visibility {
+    #[serde(rename = "private")]
+    Private,
+    #[serde(rename = "public")]
+    Public,
+}
+
+impl Default for Visibility {
+    fn default() -> Visibility {
+        Self::Private
     }
 }
 /// 

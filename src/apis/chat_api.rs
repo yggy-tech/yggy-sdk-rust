@@ -22,6 +22,7 @@ pub enum ChatError {
     Status401(models::Chat401Response),
     Status403(models::Chat401Response),
     Status500(models::Chat401Response),
+    Status504(models::Chat401Response),
     UnknownValue(serde_json::Value),
 }
 
