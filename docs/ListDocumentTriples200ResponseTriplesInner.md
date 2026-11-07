@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **subject_id** | Option<**String**> |  | [optional]
 **subject_type** | Option<**String**> |  | [optional]
 **subject_identity_uri** | Option<**String**> |  | [optional]
+**subject_status** | Option<**String**> |  | [optional]
+**object_status** | Option<**String**> |  | [optional]
 **object_id** | Option<**String**> |  | [optional]
 **object_type** | Option<**String**> |  | [optional]
 **object_identity_uri** | Option<**String**> |  | [optional]

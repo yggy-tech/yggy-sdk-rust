@@ -29,6 +29,10 @@ pub struct ListDocumentTriples200ResponseTriplesInner {
     pub subject_type: Option<String>,
     #[serde(rename = "subjectIdentityUri", skip_serializing_if = "Option::is_none")]
     pub subject_identity_uri: Option<String>,
+    #[serde(rename = "subjectStatus", skip_serializing_if = "Option::is_none")]
+    pub subject_status: Option<SubjectStatus>,
+    #[serde(rename = "objectStatus", skip_serializing_if = "Option::is_none")]
+    pub object_status: Option<ObjectStatus>,
     #[serde(rename = "objectId", skip_serializing_if = "Option::is_none")]
     pub object_id: Option<String>,
     #[serde(rename = "objectType", skip_serializing_if = "Option::is_none")]
@@ -64,6 +68,8 @@ impl ListDocumentTriples200ResponseTriplesInner {
             subject_id: None,
             subject_type: None,
             subject_identity_uri: None,
+            subject_status: None,
+            object_status: None,
             object_id: None,
             object_type: None,
             object_identity_uri: None,
@@ -76,6 +82,50 @@ impl ListDocumentTriples200ResponseTriplesInner {
             created_at: None,
             status: None,
         }
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum SubjectStatus {
+    #[serde(rename = "ACTIVE")]
+    Active,
+    #[serde(rename = "SUPERSEDED")]
+    Superseded,
+    #[serde(rename = "CONFLICTING")]
+    Conflicting,
+    #[serde(rename = "RETRACTED")]
+    Retracted,
+    #[serde(rename = "PENDING_ONTOLOGY")]
+    PendingOntology,
+    #[serde(rename = "SOURCE_DELETED")]
+    SourceDeleted,
+}
+
+impl Default for SubjectStatus {
+    fn default() -> SubjectStatus {
+        Self::Active
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ObjectStatus {
+    #[serde(rename = "ACTIVE")]
+    Active,
+    #[serde(rename = "SUPERSEDED")]
+    Superseded,
+    #[serde(rename = "CONFLICTING")]
+    Conflicting,
+    #[serde(rename = "RETRACTED")]
+    Retracted,
+    #[serde(rename = "PENDING_ONTOLOGY")]
+    PendingOntology,
+    #[serde(rename = "SOURCE_DELETED")]
+    SourceDeleted,
+}
+
+impl Default for ObjectStatus {
+    fn default() -> ObjectStatus {
+        Self::Active
     }
 }
 /// 
