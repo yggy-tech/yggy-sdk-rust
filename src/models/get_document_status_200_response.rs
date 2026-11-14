@@ -49,6 +49,8 @@ pub struct GetDocumentStatus200Response {
     pub retryable: Option<bool>,
     #[serde(rename = "triplesExtracted", skip_serializing_if = "Option::is_none")]
     pub triples_extracted: Option<f64>,
+    #[serde(rename = "outcome", skip_serializing_if = "Option::is_none")]
+    pub outcome: Option<Outcome>,
     #[serde(rename = "inputTokens", skip_serializing_if = "Option::is_none")]
     pub input_tokens: Option<f64>,
     #[serde(rename = "outputTokens", skip_serializing_if = "Option::is_none")]
@@ -90,6 +92,7 @@ impl GetDocumentStatus200Response {
             workflow_error: None,
             retryable: None,
             triples_extracted: None,
+            outcome: None,
             input_tokens: None,
             output_tokens: None,
             extraction_tier: None,
@@ -118,6 +121,18 @@ pub enum Status {
 impl Default for Status {
     fn default() -> Status {
         Self::Pending
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Outcome {
+    #[serde(rename = "unchanged")]
+    Unchanged,
+}
+
+impl Default for Outcome {
+    fn default() -> Outcome {
+        Self::Unchanged
     }
 }
 /// 
