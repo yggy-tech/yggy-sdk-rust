@@ -22,6 +22,7 @@ Name | Type | Description | Notes
 **workflow_error** | Option<**String**> |  | [optional]
 **retryable** | Option<**bool**> |  | [optional]
 **triples_extracted** | Option<**f64**> |  | [optional]
+**outcome** | Option<**String**> |  | [optional]
 **input_tokens** | Option<**f64**> |  | [optional]
 **output_tokens** | Option<**f64**> |  | [optional]
 **extraction_tier** | Option<**String**> |  | [optional]

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **source** | Option<**String**> |  | [optional]
 **source_kind** | Option<**String**> |  | [optional]
 **origin_system** | Option<**String**> |  | [optional]
+**source_external_id** | Option<**String**> |  | [optional]
 **owner_external_id** | Option<**String**> |  | [optional]
 **owner_display_name** | Option<**String**> |  | [optional]
 **content_type** | **String** |  | 
@@ -21,6 +22,7 @@ Name | Type | Description | Notes
 **error** | Option<**String**> |  | [optional]
 **code** | Option<**String**> |  | [optional]
 **failure_message** | Option<**String**> |  | [optional]
+**failed_stage** | Option<**String**> |  | [optional]
 **storage_url** | Option<**String**> |  | [optional]
 **deleted_at** | Option<**String**> |  | [optional]
 **note_kind** | Option<**String**> |  | [optional]
@@ -39,6 +41,7 @@ Name | Type | Description | Notes
 **source_author** | Option<**String**> |  | [optional]
 **source_metadata** | Option<**String**> |  | [optional]
 **attached_to** | Option<[**models::ListDocuments200ResponseDocumentsInnerAttachedTo**](listDocuments_200_response_documents_inner_attachedTo.md)> |  | [optional]
+**storage_location** | Option<[**models::ListDocuments200ResponseDocumentsInnerStorageLocation**](listDocuments_200_response_documents_inner_storageLocation.md)> |  | [optional]
 **mail_attachments** | Option<[**Vec<models::ListDocuments200ResponseDocumentsInnerMailAttachmentsInner>**](listDocuments_200_response_documents_inner_mailAttachments_inner.md)> |  | [optional]
 **project_external_id** | Option<**String**> |  | [optional]
 
