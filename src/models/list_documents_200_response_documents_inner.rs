@@ -27,6 +27,8 @@ pub struct ListDocuments200ResponseDocumentsInner {
     pub source_kind: Option<Option<SourceKind>>,
     #[serde(rename = "originSystem", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub origin_system: Option<Option<String>>,
+    #[serde(rename = "sourceExternalId", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub source_external_id: Option<Option<String>>,
     #[serde(rename = "ownerExternalId", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
     pub owner_external_id: Option<Option<String>>,
     #[serde(rename = "ownerDisplayName", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -47,6 +49,8 @@ pub struct ListDocuments200ResponseDocumentsInner {
     pub code: Option<String>,
     #[serde(rename = "failureMessage", skip_serializing_if = "Option::is_none")]
     pub failure_message: Option<String>,
+    #[serde(rename = "failedStage", skip_serializing_if = "Option::is_none")]
+    pub failed_stage: Option<FailedStage>,
     #[serde(rename = "storageUrl", skip_serializing_if = "Option::is_none")]
     pub storage_url: Option<String>,
     #[serde(rename = "deletedAt", skip_serializing_if = "Option::is_none")]
@@ -83,6 +87,8 @@ pub struct ListDocuments200ResponseDocumentsInner {
     pub source_metadata: Option<Option<String>>,
     #[serde(rename = "attachedTo", skip_serializing_if = "Option::is_none")]
     pub attached_to: Option<Box<models::ListDocuments200ResponseDocumentsInnerAttachedTo>>,
+    #[serde(rename = "storageLocation", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
+    pub storage_location: Option<Option<Box<models::ListDocuments200ResponseDocumentsInnerStorageLocation>>>,
     #[serde(rename = "mailAttachments", skip_serializing_if = "Option::is_none")]
     pub mail_attachments: Option<Vec<models::ListDocuments200ResponseDocumentsInnerMailAttachmentsInner>>,
     #[serde(rename = "projectExternalId", default, with = "::serde_with::rust::double_option", skip_serializing_if = "Option::is_none")]
@@ -99,6 +105,7 @@ impl ListDocuments200ResponseDocumentsInner {
             source: None,
             source_kind: None,
             origin_system: None,
+            source_external_id: None,
             owner_external_id: None,
             owner_display_name: None,
             content_type,
@@ -109,6 +116,7 @@ impl ListDocuments200ResponseDocumentsInner {
             error: None,
             code: None,
             failure_message: None,
+            failed_stage: None,
             storage_url: None,
             deleted_at: None,
             note_kind: None,
@@ -127,6 +135,7 @@ impl ListDocuments200ResponseDocumentsInner {
             source_author: None,
             source_metadata: None,
             attached_to: None,
+            storage_location: None,
             mail_attachments: None,
             project_external_id: None,
         }
@@ -186,6 +195,28 @@ pub enum Status {
 impl Default for Status {
     fn default() -> Status {
         Self::Pending
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum FailedStage {
+    #[serde(rename = "parse")]
+    Parse,
+    #[serde(rename = "detection")]
+    Detection,
+    #[serde(rename = "extract")]
+    Extract,
+    #[serde(rename = "resolve")]
+    Resolve,
+    #[serde(rename = "insert")]
+    Insert,
+    #[serde(rename = "finalize")]
+    Finalize,
+}
+
+impl Default for FailedStage {
+    fn default() -> FailedStage {
+        Self::Parse
     }
 }
 /// 

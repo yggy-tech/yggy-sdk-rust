@@ -1,12 +1,11 @@
-# ListProjects400ResponseError
+# QueryProject200ResponseTriplesInnerPredicate
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**message** | **String** |  | 
-**code** | **String** |  | 
-**details** | Option<[**serde_json::Value**](.md)> |  | [optional]
+**uri** | Option<**String**> | Public HTTPS URI when one is stored | [optional]
+**label** | **String** |  | 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
