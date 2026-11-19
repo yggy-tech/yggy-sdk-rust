@@ -12,16 +12,16 @@ use crate::models;
 use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
-pub struct ListProjects400Response {
+pub struct AppErrorResponse {
     #[serde(rename = "success")]
     pub success: Success,
     #[serde(rename = "error")]
-    pub error: Box<models::ListProjects400ResponseError>,
+    pub error: Box<models::AppErrorResponseError>,
 }
 
-impl ListProjects400Response {
-    pub fn new(success: Success, error: models::ListProjects400ResponseError) -> ListProjects400Response {
-        ListProjects400Response {
+impl AppErrorResponse {
+    pub fn new(success: Success, error: models::AppErrorResponseError) -> AppErrorResponse {
+        AppErrorResponse {
             success,
             error: Box::new(error),
         }

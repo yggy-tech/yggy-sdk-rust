@@ -9,9 +9,12 @@ Name | Type | Description | Notes
 **predicate** | **String** |  | 
 **object** | **String** |  | 
 **subject_identity** | Option<[**models::ListDocumentTriples200ResponseTriplesInnerSubjectIdentity**](listDocumentTriples_200_response_triples_inner_subjectIdentity.md)> |  | [optional]
+**object_identity** | Option<[**models::ListDocumentTriples200ResponseTriplesInnerObjectIdentity**](listDocumentTriples_200_response_triples_inner_objectIdentity.md)> |  | [optional]
 **subject_id** | Option<**String**> |  | [optional]
 **subject_type** | Option<**String**> |  | [optional]
 **subject_identity_uri** | Option<**String**> |  | [optional]
+**subject_status** | Option<**String**> |  | [optional]
+**object_status** | Option<**String**> |  | [optional]
 **object_id** | Option<**String**> |  | [optional]
 **object_type** | Option<**String**> |  | [optional]
 **object_identity_uri** | Option<**String**> |  | [optional]
@@ -20,6 +23,7 @@ Name | Type | Description | Notes
 **extraction_method** | Option<**String**> |  | [optional]
 **evidence** | Option<**Vec<String>**> |  | [optional]
 **evidence_region_id** | Option<**String**> |  | [optional]
+**evidence_image_id** | Option<**String**> |  | [optional]
 **note** | Option<**String**> |  | [optional]
 **created_at** | Option<**String**> |  | [optional]
 **status** | Option<**String**> |  | [optional]

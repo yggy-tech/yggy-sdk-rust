@@ -22,6 +22,24 @@ pub struct Chat200ResponseDataCitationsInner {
     /// Evidence text when the tool returned it
     #[serde(rename = "snippet", skip_serializing_if = "Option::is_none")]
     pub snippet: Option<String>,
+    /// Document image the cited passage came from, read from the document text; set with imagePlace
+    #[serde(rename = "imageId", skip_serializing_if = "Option::is_none")]
+    pub image_id: Option<String>,
+    /// Where that image sits in the document, e.g. \"Slide 3\"
+    #[serde(rename = "imagePlace", skip_serializing_if = "Option::is_none")]
+    pub image_place: Option<String>,
+    /// Your own id for the document, as sent on upload
+    #[serde(rename = "externalId", skip_serializing_if = "Option::is_none")]
+    pub external_id: Option<String>,
+    /// Business system the data originates from
+    #[serde(rename = "originSystem", skip_serializing_if = "Option::is_none")]
+    pub origin_system: Option<String>,
+    /// Link to the document in your system
+    #[serde(rename = "webUrl", skip_serializing_if = "Option::is_none")]
+    pub web_url: Option<String>,
+    /// Your own key-value pairs, as sent on upload. Imported documents carry fields of their source here.
+    #[serde(rename = "metadata", skip_serializing_if = "Option::is_none")]
+    pub metadata: Option<std::collections::HashMap<String, models::QueryProject200ResponseContextsInnerMetadataValue>>,
 }
 
 impl Chat200ResponseDataCitationsInner {
@@ -30,6 +48,12 @@ impl Chat200ResponseDataCitationsInner {
             document_id,
             source: None,
             snippet: None,
+            image_id: None,
+            image_place: None,
+            external_id: None,
+            origin_system: None,
+            web_url: None,
+            metadata: None,
         }
     }
 }

@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **organization_id** | **String** |  | 
 **external_id** | Option<**String**> |  | [optional]
 **kind** | Option<**String**> |  | [optional]
+**visibility** | **String** | Who in the organization can see that this project exists. `private` (the default): only project members and organization owners and admins. `public`: every organization member sees its name in the project list, but only members can open it. A personal project (My files) is always `private`. | 
 **extraction_purpose** | Option<**String**> |  | [optional]
 **extraction_include** | Option<**Vec<String>**> |  | [optional]
 **extraction_skip** | Option<**Vec<String>**> |  | [optional]

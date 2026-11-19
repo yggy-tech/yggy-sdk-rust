@@ -19,6 +19,8 @@ pub struct GetDocumentStatus200Response {
     pub step: Option<String>,
     #[serde(rename = "progress")]
     pub progress: f64,
+    #[serde(rename = "documentStatus", skip_serializing_if = "Option::is_none")]
+    pub document_status: Option<DocumentStatus>,
     #[serde(rename = "message", skip_serializing_if = "Option::is_none")]
     pub message: Option<String>,
     #[serde(rename = "paused", skip_serializing_if = "Option::is_none")]
@@ -49,6 +51,8 @@ pub struct GetDocumentStatus200Response {
     pub retryable: Option<bool>,
     #[serde(rename = "triplesExtracted", skip_serializing_if = "Option::is_none")]
     pub triples_extracted: Option<f64>,
+    #[serde(rename = "outcome", skip_serializing_if = "Option::is_none")]
+    pub outcome: Option<Outcome>,
     #[serde(rename = "inputTokens", skip_serializing_if = "Option::is_none")]
     pub input_tokens: Option<f64>,
     #[serde(rename = "outputTokens", skip_serializing_if = "Option::is_none")]
@@ -75,6 +79,7 @@ impl GetDocumentStatus200Response {
             document_id,
             step: None,
             progress,
+            document_status: None,
             message: None,
             paused: None,
             completed,
@@ -90,6 +95,7 @@ impl GetDocumentStatus200Response {
             workflow_error: None,
             retryable: None,
             triples_extracted: None,
+            outcome: None,
             input_tokens: None,
             output_tokens: None,
             extraction_tier: None,
@@ -100,6 +106,24 @@ impl GetDocumentStatus200Response {
             invocation_id: None,
             updated_at,
         }
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum DocumentStatus {
+    #[serde(rename = "PENDING")]
+    Pending,
+    #[serde(rename = "PROCESSING")]
+    Processing,
+    #[serde(rename = "COMPLETED")]
+    Completed,
+    #[serde(rename = "FAILED")]
+    Failed,
+}
+
+impl Default for DocumentStatus {
+    fn default() -> DocumentStatus {
+        Self::Pending
     }
 }
 /// 
@@ -118,6 +142,18 @@ pub enum Status {
 impl Default for Status {
     fn default() -> Status {
         Self::Pending
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Outcome {
+    #[serde(rename = "unchanged")]
+    Unchanged,
+}
+
+impl Default for Outcome {
+    fn default() -> Outcome {
+        Self::Unchanged
     }
 }
 /// 
