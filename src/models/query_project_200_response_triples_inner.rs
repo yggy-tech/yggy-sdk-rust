@@ -11,30 +11,55 @@
 use crate::models;
 use serde::{Deserialize, Serialize};
 
+/// QueryProject200ResponseTriplesInner : A fact yggy extracted: subject, relation, object
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct QueryProject200ResponseTriplesInner {
     #[serde(rename = "subject")]
     pub subject: Box<models::QueryProject200ResponseTriplesInnerSubject>,
     #[serde(rename = "predicate")]
-    pub predicate: Box<models::QueryProject200ResponseTriplesInnerSubject>,
+    pub predicate: Box<models::QueryProject200ResponseTriplesInnerPredicate>,
     #[serde(rename = "object")]
-    pub object: Box<models::QueryProject200ResponseTriplesInnerSubject>,
-    /// Stored hit text. Omitted when the graph hit has none.
+    pub object: Box<models::QueryProject200ResponseTriplesInnerObject>,
+    /// Source text for the fact, when yggy stored it
     #[serde(rename = "evidence", skip_serializing_if = "Option::is_none")]
     pub evidence: Option<String>,
+    /// `pending_review` marks a fact that still waits on an ontology review and is not yet confirmed. Absent means active.
+    #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
+    pub status: Option<Status>,
+    /// For a measured value: what it measures and the conditions it held under, e.g. `time to first token; provider Google`
+    #[serde(rename = "measures", skip_serializing_if = "Option::is_none")]
+    pub measures: Option<String>,
+    /// The returned document the fact was extracted from
     #[serde(rename = "documentId", skip_serializing_if = "Option::is_none")]
     pub document_id: Option<String>,
 }
 
 impl QueryProject200ResponseTriplesInner {
-    pub fn new(subject: models::QueryProject200ResponseTriplesInnerSubject, predicate: models::QueryProject200ResponseTriplesInnerSubject, object: models::QueryProject200ResponseTriplesInnerSubject) -> QueryProject200ResponseTriplesInner {
+    /// A fact yggy extracted: subject, relation, object
+    pub fn new(subject: models::QueryProject200ResponseTriplesInnerSubject, predicate: models::QueryProject200ResponseTriplesInnerPredicate, object: models::QueryProject200ResponseTriplesInnerObject) -> QueryProject200ResponseTriplesInner {
         QueryProject200ResponseTriplesInner {
             subject: Box::new(subject),
             predicate: Box::new(predicate),
             object: Box::new(object),
             evidence: None,
+            status: None,
+            measures: None,
             document_id: None,
         }
+    }
+}
+/// `pending_review` marks a fact that still waits on an ontology review and is not yet confirmed. Absent means active.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum Status {
+    #[serde(rename = "active")]
+    Active,
+    #[serde(rename = "pending_review")]
+    PendingReview,
+}
+
+impl Default for Status {
+    fn default() -> Status {
+        Self::Active
     }
 }
 

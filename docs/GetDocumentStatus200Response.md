@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **document_id** | **String** |  | 
 **step** | Option<**String**> |  | [optional]
 **progress** | **f64** |  | 
+**document_status** | Option<**String**> |  | [optional]
 **message** | Option<**String**> |  | [optional]
 **paused** | Option<**bool**> |  | [optional]
 **completed** | **bool** |  | 
@@ -22,6 +23,7 @@ Name | Type | Description | Notes
 **workflow_error** | Option<**String**> |  | [optional]
 **retryable** | Option<**bool**> |  | [optional]
 **triples_extracted** | Option<**f64**> |  | [optional]
+**outcome** | Option<**String**> |  | [optional]
 **input_tokens** | Option<**f64**> |  | [optional]
 **output_tokens** | Option<**f64**> |  | [optional]
 **extraction_tier** | Option<**String**> |  | [optional]

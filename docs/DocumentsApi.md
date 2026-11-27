@@ -179,7 +179,7 @@ Name | Type | Description  | Required | Notes
 
 ## list_documents
 
-> models::ListDocuments200Response list_documents(project_id, project_id2, status, archived, limit, offset, sort_by, sort_dir, q, folder_id, note_kind, x_yggy_organization_id)
+> models::ListDocuments200Response list_documents(project_id, project_id2, status, archived, limit, offset, sort_by, sort_dir, q, folder_id, source_kind, note_kind, x_yggy_organization_id)
 List documents for a project
 
 Retrieve a list of documents scoped to the project, with optional filtering and pagination.
@@ -199,6 +199,7 @@ Name | Type | Description  | Required | Notes
 **sort_dir** | Option<**String**> |  |  |[default to desc]
 **q** | Option<**String**> | Case-insensitive substring search over title and source filename/path. |  |
 **folder_id** | Option<**String**> | Browse documents in this folder (externalId). Use the literal value `root` for unfiled documents only. Omit to list all documents (legacy). |  |
+**source_kind** | Option<**String**> | When set, only documents that came in through this channel, such as FORWARDED for forwarded mail. |  |
 **note_kind** | Option<**String**> | When set, only documents of this note kind (capture, daily, or note). |  |
 **x_yggy_organization_id** | Option<**String**> |  |  |
 
@@ -315,7 +316,7 @@ Name | Type | Description  | Required | Notes
 
 ## upload_document
 
-> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, for_link_id, title, source, origin_system, project_id2, desired_tier, inference_mode)
+> models::UploadDocument202Response upload_document(project_id, x_yggy_organization_id, file, text, note_kind, parent_note_id, for_link_id, title, source, origin_system, source_created_at, external_id, metadata, project_id2, extraction_scope, desired_tier, inference_mode, onboarding)
 Upload and queue a document for async processing (project-scoped)
 
 Uploads a document to storage, binds it to the project from the path, and queues it for processing.
@@ -328,16 +329,21 @@ Name | Type | Description  | Required | Notes
 **project_id** | **String** |  | [required] |
 **x_yggy_organization_id** | Option<**String**> |  |  |
 **file** | Option<**std::path::PathBuf**> | The document file to upload. Optional when text is set. |  |
-**text** | Option<**String**> | Plain text or markdown body. Used when no file is uploaded. |  |
+**text** | Option<**String**> | Plain text or markdown body. Used when no file is uploaded: it is processed like an uploaded markdown file. With noteKind it becomes a yggy note instead. |  |
 **note_kind** | Option<**String**> | Note kind. When set, the upload is stored on the caller's personal organization. |  |
 **parent_note_id** | Option<**String**> | yggy notes: attach the file to this note. The file becomes a document of its own that belongs to the note, and needs a file. |  |
 **for_link_id** | Option<**String**> | yggy Notes: the link attachment of the same note this file was uploaded for (its audio, for a transcript). Needs parentNoteId. |  |
 **title** | Option<**String**> | Document title |  |
 **source** | Option<**String**> | Source identifier |  |
 **origin_system** | Option<**String**> | Business system the data originates from |  |
+**source_created_at** | Option<[**models::UploadDocumentRequestSourceCreatedAt**](uploadDocument_request_sourceCreatedAt.md)> |  |  |
+**external_id** | Option<**String**> | Your own id for the document. Returned as externalId in query results and chat citations. |  |
+**metadata** | Option<**String**> | JSON object of your own key-value pairs for the document, for example {\\\"region\\\":\\\"EU\\\",\\\"priority\\\":2}. Values are strings, numbers or booleans; at most 50 keys and 8192 bytes. Returned as metadata in query results and chat citations. |  |
 **project_id2** | Option<**String**> | Project ID to bind the document to at upload time |  |
+**extraction_scope** | Option<**String**> | Set by yggy Systems: extract the document at system level only (systems, interfaces, data stores, schema types, owners). Needs the systems entitlement. Counts only when the document is first ingested; later extractions keep the scope the document got. |  |
 **desired_tier** | Option<**String**> | Model tier for extraction. Defaults to auto. |  |
 **inference_mode** | Option<**String**> | Inference routing for extraction. Defaults to org settings. |  |
+**onboarding** | Option<**String**> | First-run onboarding request; the server decides whether the free first batch applies. |  |
 
 ### Return type
 
