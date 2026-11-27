@@ -23,12 +23,18 @@ pub struct ListDocumentTriples200ResponseTriplesInner {
     pub object: String,
     #[serde(rename = "subjectIdentity", skip_serializing_if = "Option::is_none")]
     pub subject_identity: Option<Box<models::ListDocumentTriples200ResponseTriplesInnerSubjectIdentity>>,
+    #[serde(rename = "objectIdentity", skip_serializing_if = "Option::is_none")]
+    pub object_identity: Option<Box<models::ListDocumentTriples200ResponseTriplesInnerObjectIdentity>>,
     #[serde(rename = "subjectId", skip_serializing_if = "Option::is_none")]
     pub subject_id: Option<String>,
     #[serde(rename = "subjectType", skip_serializing_if = "Option::is_none")]
     pub subject_type: Option<String>,
     #[serde(rename = "subjectIdentityUri", skip_serializing_if = "Option::is_none")]
     pub subject_identity_uri: Option<String>,
+    #[serde(rename = "subjectStatus", skip_serializing_if = "Option::is_none")]
+    pub subject_status: Option<SubjectStatus>,
+    #[serde(rename = "objectStatus", skip_serializing_if = "Option::is_none")]
+    pub object_status: Option<ObjectStatus>,
     #[serde(rename = "objectId", skip_serializing_if = "Option::is_none")]
     pub object_id: Option<String>,
     #[serde(rename = "objectType", skip_serializing_if = "Option::is_none")]
@@ -45,25 +51,32 @@ pub struct ListDocumentTriples200ResponseTriplesInner {
     pub evidence: Option<Vec<String>>,
     #[serde(rename = "evidenceRegionId", skip_serializing_if = "Option::is_none")]
     pub evidence_region_id: Option<String>,
+    #[serde(rename = "evidenceImageId", skip_serializing_if = "Option::is_none")]
+    pub evidence_image_id: Option<String>,
     #[serde(rename = "note", skip_serializing_if = "Option::is_none")]
     pub note: Option<String>,
     #[serde(rename = "created_at", skip_serializing_if = "Option::is_none")]
     pub created_at: Option<String>,
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<Status>,
+    #[serde(rename = "howSure")]
+    pub how_sure: Box<models::HowSure>,
 }
 
 impl ListDocumentTriples200ResponseTriplesInner {
-    pub fn new(subject: String, predicate: String, object: String) -> ListDocumentTriples200ResponseTriplesInner {
+    pub fn new(subject: String, predicate: String, object: String, how_sure: models::HowSure) -> ListDocumentTriples200ResponseTriplesInner {
         ListDocumentTriples200ResponseTriplesInner {
             id: None,
             subject,
             predicate,
             object,
             subject_identity: None,
+            object_identity: None,
             subject_id: None,
             subject_type: None,
             subject_identity_uri: None,
+            subject_status: None,
+            object_status: None,
             object_id: None,
             object_type: None,
             object_identity_uri: None,
@@ -72,10 +85,56 @@ impl ListDocumentTriples200ResponseTriplesInner {
             extraction_method: None,
             evidence: None,
             evidence_region_id: None,
+            evidence_image_id: None,
             note: None,
             created_at: None,
             status: None,
+            how_sure: Box::new(how_sure),
         }
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum SubjectStatus {
+    #[serde(rename = "ACTIVE")]
+    Active,
+    #[serde(rename = "SUPERSEDED")]
+    Superseded,
+    #[serde(rename = "CONFLICTING")]
+    Conflicting,
+    #[serde(rename = "RETRACTED")]
+    Retracted,
+    #[serde(rename = "PENDING_ONTOLOGY")]
+    PendingOntology,
+    #[serde(rename = "SOURCE_DELETED")]
+    SourceDeleted,
+}
+
+impl Default for SubjectStatus {
+    fn default() -> SubjectStatus {
+        Self::Active
+    }
+}
+/// 
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Ord, PartialOrd, Hash, Serialize, Deserialize)]
+pub enum ObjectStatus {
+    #[serde(rename = "ACTIVE")]
+    Active,
+    #[serde(rename = "SUPERSEDED")]
+    Superseded,
+    #[serde(rename = "CONFLICTING")]
+    Conflicting,
+    #[serde(rename = "RETRACTED")]
+    Retracted,
+    #[serde(rename = "PENDING_ONTOLOGY")]
+    PendingOntology,
+    #[serde(rename = "SOURCE_DELETED")]
+    SourceDeleted,
+}
+
+impl Default for ObjectStatus {
+    fn default() -> ObjectStatus {
+        Self::Active
     }
 }
 /// 

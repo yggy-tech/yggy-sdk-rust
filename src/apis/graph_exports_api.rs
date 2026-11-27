@@ -19,12 +19,12 @@ use super::{Error, configuration, ContentType};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum CreateGraphExportError {
-    Status401(models::ListProjects400Response),
-    Status403(models::ListProjects400Response),
-    Status404(models::ListProjects400Response),
-    Status409(models::ListProjects400Response),
-    Status429(models::ListProjects400Response),
-    Status503(models::ListProjects400Response),
+    Status401(models::AppErrorResponse),
+    Status403(models::AppErrorResponse),
+    Status404(models::AppErrorResponse),
+    Status409(models::AppErrorResponse),
+    Status429(models::AppErrorResponse),
+    Status503(models::AppErrorResponse),
     UnknownValue(serde_json::Value),
 }
 
@@ -32,10 +32,10 @@ pub enum CreateGraphExportError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum DownloadGraphExportError {
-    Status401(models::ListProjects400Response),
-    Status403(models::ListProjects400Response),
-    Status404(models::ListProjects400Response),
-    Status409(models::ListProjects400Response),
+    Status401(models::AppErrorResponse),
+    Status403(models::AppErrorResponse),
+    Status404(models::AppErrorResponse),
+    Status409(models::AppErrorResponse),
     UnknownValue(serde_json::Value),
 }
 
@@ -43,9 +43,9 @@ pub enum DownloadGraphExportError {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum ListGraphExportsError {
-    Status401(models::ListProjects400Response),
-    Status403(models::ListProjects400Response),
-    Status404(models::ListProjects400Response),
+    Status401(models::AppErrorResponse),
+    Status403(models::AppErrorResponse),
+    Status404(models::AppErrorResponse),
     UnknownValue(serde_json::Value),
 }
 

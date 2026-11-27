@@ -19,7 +19,7 @@ use super::{Error, configuration, ContentType};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
 pub enum GetEntityByIdentityError {
-    Status404(models::ListProjects400Response),
+    Status404(models::AppErrorResponse),
     UnknownValue(serde_json::Value),
 }
 

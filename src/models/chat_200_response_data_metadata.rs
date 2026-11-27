@@ -17,6 +17,9 @@ pub struct Chat200ResponseDataMetadata {
     pub processing_time_ms: f64,
     #[serde(rename = "tierApplied")]
     pub tier_applied: TierApplied,
+    /// Why the applied tier differs from the requested one
+    #[serde(rename = "tierReason", skip_serializing_if = "Option::is_none")]
+    pub tier_reason: Option<String>,
 }
 
 impl Chat200ResponseDataMetadata {
@@ -24,6 +27,7 @@ impl Chat200ResponseDataMetadata {
         Chat200ResponseDataMetadata {
             processing_time_ms,
             tier_applied,
+            tier_reason: None,
         }
     }
 }
